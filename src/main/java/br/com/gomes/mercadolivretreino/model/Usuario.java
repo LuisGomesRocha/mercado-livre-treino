@@ -2,10 +2,7 @@ package br.com.gomes.mercadolivretreino.model;
 
 import br.com.gomes.mercadolivretreino.response.UsuarioResponse;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -18,6 +15,7 @@ public class Usuario {
     private Long id;
     @NotBlank(message = "Login não deve ser branco!")
     @Size(min = 3, max = 30, message = "Login deve conter de 3 a 30 caracteres!")
+    @Column(unique = true)
     private String login;
     @Size(min = 6, message = "Senha precisa ter no mínimo 6 caracteres!")
     @NotBlank(message = "Senha em branco!")
