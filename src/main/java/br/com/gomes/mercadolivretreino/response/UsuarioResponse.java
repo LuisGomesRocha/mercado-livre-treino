@@ -8,4 +8,12 @@ public class UsuarioResponse {
         this.id = id;
         this.login = login;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
 }
