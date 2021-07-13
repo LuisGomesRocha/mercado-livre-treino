@@ -1,5 +1,6 @@
 package br.com.gomes.mercadolivretreino.service;
 
+import br.com.gomes.mercadolivretreino.model.Produto;
 import br.com.gomes.mercadolivretreino.model.Usuario;
 import br.com.gomes.mercadolivretreino.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
