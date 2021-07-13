@@ -27,4 +27,8 @@ public class CategoriaService {
         categoriaRepository.save(categoria);
 
     }
+
+    public Categoria buscarCategoria(Long idCategoria) {
+        return categoriaRepository.findById(idCategoria).get();
+    }
 }
