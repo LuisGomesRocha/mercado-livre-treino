@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.*;
 
 @Entity
 public class Usuario implements UserDetails {
@@ -24,15 +24,24 @@ public class Usuario implements UserDetails {
     @NotBlank(message = "Senha em branco!")
     private String senha;
     private LocalDateTime localDateTime = LocalDateTime.now();
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+    private List<Produto> produtos;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Opiniao> opinioes;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Pergunta> perguntas;
 
 
     @Deprecated
-    public Usuario(){
+    public Usuario() {
     }
 
     public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
+        this.produtos = new ArrayList<>();
+        this.opinioes = new HashSet<>();
+        this.perguntas = new HashSet<>();
     }
 
     public Long getId() {
@@ -67,10 +76,33 @@ public class Usuario implements UserDetails {
         this.localDateTime = localDateTime;
     }
 
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    public Set<Opiniao> getOpinioes() {
+        return opinioes;
+    }
+
+    public void setOpinioes(Set<Opiniao> opinioes) {
+        this.opinioes = opinioes;
+    }
+
+    public Set<Pergunta> getPerguntas() {
+        return perguntas;
+    }
+
+    public void setPerguntas(Set<Pergunta> perguntas) {
+        this.perguntas = perguntas;
+    }
+
     public UsuarioResponse toResponse() {
         return new UsuarioResponse(this.id, this.login);
     }
-
 
 
     @Override

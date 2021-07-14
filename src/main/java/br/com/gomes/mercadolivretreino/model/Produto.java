@@ -10,6 +10,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.time.LocalDateTime.now;
@@ -29,24 +30,40 @@ public class Produto {
     private int quantidade;
     @NotNull
     @Size(min = 3)
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", orphanRemoval = true)
     private List<Caracteristica> caracteristicas;
     @NotBlank
     @Length(max = 1000)
     private String descricao;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Imagem> imagens;
     @NotNull
     @ManyToOne
     private Categoria categoria;
     private LocalDateTime instanteCadastro = now();
+    @ManyToOne
+    @NotNull
+    private Usuario usuario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", orphanRemoval = true)
+    private List<Opiniao> opinioes;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", orphanRemoval = true)
+    private List<Pergunta> perguntas;
 
-
-    public Produto(String nome, BigDecimal valor, int quantidade, List<Caracteristica> caracteristicas, String descricao, Categoria categoria) {
+    public Produto(String nome, BigDecimal valor, int quantidade, List<Caracteristica> caracteristicas, String descricao, Categoria categoria, Usuario usuario) {
         this.nome = nome;
         this.valor = valor;
         this.quantidade = quantidade;
         this.caracteristicas = caracteristicas;
         this.descricao = descricao;
+        this.imagens = new ArrayList<>();
         this.categoria = categoria;
+        this.usuario = usuario;
+        this.opinioes = new ArrayList<>();
+        this.perguntas = new ArrayList<>();
+    }
+
+    @Deprecated
+    public Produto() {
     }
 
     public Long getId() {
@@ -107,5 +124,37 @@ public class Produto {
 
     public ProdutoResponse toResponse() {
         return new ProdutoResponse(this.id, this.nome);
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Imagem> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(List<Imagem> imagens) {
+        this.imagens = imagens;
+    }
+
+    public List<Opiniao> getOpinioes() {
+        return opinioes;
+    }
+
+    public void setOpinioes(List<Opiniao> opinioes) {
+        this.opinioes = opinioes;
+    }
+
+    public List<Pergunta> getPerguntas() {
+        return perguntas;
+    }
+
+    public void setPerguntas(List<Pergunta> perguntas) {
+        this.perguntas = perguntas;
     }
 }
