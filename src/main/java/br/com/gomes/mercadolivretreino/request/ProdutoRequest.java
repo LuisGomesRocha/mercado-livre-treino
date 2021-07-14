@@ -4,12 +4,14 @@ import br.com.gomes.mercadolivretreino.config.custom.annotations.ExistsId;
 import br.com.gomes.mercadolivretreino.model.Caracteristica;
 import br.com.gomes.mercadolivretreino.model.Categoria;
 import br.com.gomes.mercadolivretreino.model.Produto;
+import br.com.gomes.mercadolivretreino.model.Usuario;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoRequest {
@@ -87,14 +89,7 @@ public class ProdutoRequest {
         this.categoria = categoria;
     }
 
-    public Produto toModel(Categoria categoria) {
-        return new Produto(
-                this.nome,
-                this.valor,
-                this.quantidade,
-                this.caracteristicas,
-                this.descricao,
-                categoria
-        );
+    public Produto toModel(Categoria categoria, Usuario usuario) {
+        return new Produto(nome,valor,quantidade,caracteristicas,descricao,categoria,usuario);
     }
 }

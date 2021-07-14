@@ -14,6 +14,7 @@ public class Caracteristica {
     @NotBlank
     private String descricao;
     @ManyToOne
+    @JoinColumn(name = "produto_id")
     private Produto produto;
 
     public Caracteristica(Long id, String caracteristica, String descricao) {
@@ -21,6 +22,8 @@ public class Caracteristica {
         this.caracteristica = caracteristica;
         this.descricao = descricao;
     }
+@Deprecated
+    public Caracteristica(){}
 
     public Long getId() {
         return id;
@@ -45,4 +48,14 @@ public class Caracteristica {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+
 }
