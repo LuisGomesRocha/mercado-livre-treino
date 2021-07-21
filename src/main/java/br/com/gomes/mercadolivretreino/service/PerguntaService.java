@@ -20,11 +20,11 @@ public class PerguntaService {
 
     public Long salvarPergunta(Usuario usuario, PerguntaRequest perguntaRequest) {
 
-
         Produto produto = produtoService.procurarProduto(perguntaRequest.getIdProduto());
         Pergunta pergunta = perguntaRequest.toModel(usuario, produto);
         produto.getPerguntas().add(pergunta);
         usuario.getPerguntas().add(pergunta);
+        System.out.println("Para: " + produto.getUsuario().getLogin() + " \nPergunta: " + pergunta.getTitulo());
         return perguntaRepository.save(pergunta).getId();
 
     }

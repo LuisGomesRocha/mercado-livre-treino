@@ -1,5 +1,7 @@
 package br.com.gomes.mercadolivretreino.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -15,6 +17,7 @@ public class Caracteristica {
     private String descricao;
     @ManyToOne
     @JoinColumn(name = "produto_id")
+    @JsonIgnore
     private Produto produto;
 
     public Caracteristica(Long id, String caracteristica, String descricao) {

@@ -1,5 +1,7 @@
 package br.com.gomes.mercadolivretreino.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -17,9 +19,11 @@ public class Pergunta {
     private String titulo;
     @NotNull
     @ManyToOne
+    @JsonIgnore
     private Usuario usuario;
     @NotNull
     @ManyToOne
+    @JsonIgnore
     private Produto produto;
     @NotNull
     private LocalDateTime instanteCriacao = now();
