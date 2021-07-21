@@ -1,5 +1,6 @@
 package br.com.gomes.mercadolivretreino.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -23,9 +24,11 @@ public class Opiniao {
     private String descricao;
     @NotNull
     @ManyToOne
+    @JsonIgnore
     private Usuario usuario;
     @NotNull
     @ManyToOne
+    @JsonIgnore
     private Produto produto;
 
 

@@ -1,6 +1,8 @@
 package br.com.gomes.mercadolivretreino.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,12 +11,13 @@ public class Imagem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Lob
-    private byte[] imagem;
+    @Column(columnDefinition = "TEXT")
+    private String imagem;
     @ManyToOne
+    @JsonIgnore
     private Produto produto;
 
-    public Imagem(Long id, byte[] imagem, Produto produto) {
+    public Imagem(Long id, String imagem, Produto produto) {
         this.id = id;
         this.imagem = imagem;
         this.produto = produto;
@@ -31,11 +34,11 @@ public class Imagem {
         this.id = id;
     }
 
-    public byte[] getImagem() {
+    public String getImagem() {
         return imagem;
     }
 
-    public void setImagem(byte[] imagem) {
+    public void setImagem(String imagem) {
         this.imagem = imagem;
     }
 
